@@ -1,1 +1,1 @@
-### Create Gaussian splats for ShapeNet models
+# Create Gaussian splats for ShapeNet models
