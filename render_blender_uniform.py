@@ -2,7 +2,7 @@
 # Also produces depth map at the same time.
 #
 # Example:
-# blender --background --python render_blender_uniform.py -- --ntheta 12 --nphi 6 /path/to/my.obj
+# blender --background --python render_blender_uniform.py -- --ntheta 12 --nphi 6 --output_dir "" /path/to/my.obj
 #
 
 import argparse, sys, os
@@ -193,7 +193,13 @@ np.save(cam_extrinsics_path, cam_extrinsics)
 
 # sample initial point cloud
 mesh = trimesh.load(args.obj, force='mesh')
-points, face_index, colors = trimesh.sample.sample_surface(mesh, count=args.npoints, sample_color=True)
+try:
+    points, face_index, colors = trimesh.sample.sample_surface(mesh, count=args.npoints, sample_color=True)
+except TypeError:
+    print("mesh.visual.uv is NoneType! Set object color to gray")
+    points, face_index = trimesh.sample.sample_surface(mesh, count=args.npoints)
+    colors = np.ones((args.npoints, 3)) * 128 # set to gray
+
 face_normals = mesh.face_normals
 normals = face_normals[face_index]
 output_obj_path = os.path.join(output_dir, 'pointcloud.ply')
