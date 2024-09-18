@@ -190,17 +190,22 @@ for i, coords in enumerate(cam_coordinates):
     cam_extrinsics[i, ...] = np.array(cam.matrix_world)
 
 np.save(cam_extrinsics_path, cam_extrinsics)
+print("Images and camera parameters saved!")
 
 # sample initial point cloud
 mesh = trimesh.load(args.obj, force='mesh')
 try:
     points, face_index, colors = trimesh.sample.sample_surface(mesh, count=args.npoints, sample_color=True)
-except TypeError:
-    print("mesh.visual.uv is NoneType! Set object color to gray")
+    face_normals = mesh.face_normals
+    normals = face_normals[face_index]
+    output_obj_path = os.path.join(output_dir, 'pointcloud.ply')
+    storePly(output_obj_path, points, colors[:, :3], normals)
+    print(".ply saved!")
+except:
+    print("Mesh color is NoneType! Set color to gray")
     points, face_index = trimesh.sample.sample_surface(mesh, count=args.npoints)
     colors = np.ones((args.npoints, 3)) * 128 # set to gray
-
-face_normals = mesh.face_normals
-normals = face_normals[face_index]
-output_obj_path = os.path.join(output_dir, 'pointcloud.ply')
-storePly(output_obj_path, points, colors[:, :3], normals)
+    face_normals = mesh.face_normals
+    normals = face_normals[face_index]
+    output_obj_path = os.path.join(output_dir, 'pointcloud.ply')
+    storePly(output_obj_path, points, colors[:, :3], normals)

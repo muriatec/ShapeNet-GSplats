@@ -4,7 +4,6 @@ import time
 from joblib import Parallel, delayed
 import argparse
 
-#
 parser = argparse.ArgumentParser()
 parser.add_argument('--model_root_dir', type=str, default="/mnt/data/ShapeNetCore.v2")
 parser.add_argument('--render_root_dir', type=str, default="/mnt/data/ShapeNetCore.v2.Rendering")
@@ -54,10 +53,11 @@ def gen_obj(model_root_dir, cat_id, obj_id):
 
 		print("Finished %s %s"%(cat_id, obj_id))
 #
-
+print("==========Start Rendering==========")
 for filename in os.listdir(filelist_dir):
 	if filename.endswith(".lst"):
 		cat_id = filename.split(".")[0]
+		print("Start New Category %s"%cat_id)
 		file = os.path.join(filelist_dir, filename)
 		lst = []
 		with open(file) as f:
@@ -71,8 +71,8 @@ for filename in os.listdir(filelist_dir):
 			parallel(delayed(gen_obj)(model_root_dir, cat_id, obj_id) for
 					 model_root_dir, cat_id, obj_id in
 					 zip(model_root_dir_lst, cat_id_lst, lst))
-	print("Finished %s"%cat_id)
-
+	print("Finished Category %s"%cat_id)
+print("==========Finished Rendering==========")
 
 # if not os.path.exists(output_path):
 #     os.makedirs(output_path)
@@ -81,10 +81,6 @@ for filename in os.listdir(filelist_dir):
 # 	tic = time.time()
 # 	os.system('blender --background --python render_blender.py -- --output_folder %s %s > /dev/null 2>&1' % (output_path, objpath))
 # 	print time.time()-tic
-
-
-
-
 
 # def convertfilelst(filelist_dir):
 # 	for filename in os.listdir(filelist_dir):
