@@ -3,6 +3,11 @@ You can use this repo to create Gaussian splats for ShapeNet models. We run it o
 ## Installation
 We use blender 3.6.13 to render the objects, you can download it [here](https://mirrors.ocf.berkeley.edu/blender/release/Blender3.6/blender-3.6.13-linux-x64.tar.xz). After extracting blender, please go to ```/path/to/blender/3.6/python/bin/python3.10``` and install ```numpy```, ```opencv-python```, ```trimesh``` and ```plyfile```.
 
+To use the rendering scripts, just run
+```
+/path/to/blender --background --python render_blender_uniform.py -- --ntheta 12 --nphi 6 --output_dir /path/to/output /path/to/my.obj
+```
+
 After running the dataset preparation script, you will get the GS-ready dataset organized as follows:
 ```
 └── 📁{model_ID}
