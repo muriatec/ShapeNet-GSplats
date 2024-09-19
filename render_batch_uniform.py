@@ -41,7 +41,9 @@ def gen_obj(model_root_dir, cat_id, obj_id):
 		objpath = os.path.join(model_root_dir, cat_id, obj_id, "model") # for v1
 	output_dir = os.path.join(render_root_dir, cat_id, obj_id)
 	os.makedirs(output_dir, exist_ok=True)
-	if os.path.exists(os.path.join(output_dir, "pointcloud.ply")):
+	if os.path.exists(os.path.join(output_dir, "pointcloud.ply")) \
+	and os.path.exists(os.path.join(output_dir, "cameras", "extrinsics.npy")) \
+	and os.path.exists(os.path.join(output_dir, "images")):
 		print("Exist!!!, skip %s %s" % (cat_id, obj_id))
 	else:
 		print("Start %s %s" % (cat_id, obj_id))
