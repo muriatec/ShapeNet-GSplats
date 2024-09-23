@@ -1,9 +1,11 @@
 # Gaussian splats for ShapeNet
-You can use this repo to create Gaussian splats for ShapeNet models. We run it on ShapeNetCore.v2.
-## Installation
-We use blender 3.6.13 to render the objects, you can download it [here](https://mirrors.ocf.berkeley.edu/blender/release/Blender3.6/blender-3.6.13-linux-x64.tar.xz). After extracting blender, please go to ```/path/to/blender/3.6/python/bin/python3.10``` and install ```numpy```, ```opencv-python```, ```trimesh``` and ```plyfile```.
+Running the incredible 3D Gaussian Splatting on ShapeNet. Tested on ShapeNetCore.v2.
 
 ## Rendering
+### Installation
+We use blender 3.6.13 to render the objects, you can download it [here](https://mirrors.ocf.berkeley.edu/blender/release/Blender3.6/blender-3.6.13-linux-x64.tar.xz). After extracting blender, please go to ```/path/to/blender/3.6/python/bin/python3.10``` and install ```numpy```, ```opencv-python```, ```trimesh``` and ```plyfile```.
+
+### Running
 To use the rendering scripts, just run
 ```
 /path/to/blender --background --python render_blender_uniform.py -- --ntheta 12 --nphi 6 --output_dir /path/to/output /path/to/my.obj
@@ -31,7 +33,7 @@ You will get the GS-ready dataset organized as follows:
 For models missing color information, we initialize the point cloud with gray.
 
 ## Training Gaussian Splats
-Please follow the instructions [here](https://github.com/graphdeco-inria/gaussian-splatting/blob/8a70a8cd6f0d9c0a14f564844ead2d1147d5a7ac/README.md) to set up the necessary environment for 3DGS. You can also build a docker image using the Dockerfile we provided in this repo or directly pull it from [Docker Hub](https://hub.docker.com/r/clchen2133/gsplat). If you'd like to use our Dockerfile, please also modify the source code of the SIBR viewer as shown [here](https://github.com/graphdeco-inria/gaussian-splatting/issues/965#issuecomment-2323401099) to ensure successful installation.
+We modified the original 3DGS code to read our ShapeNet rendering dataset. Please follow the instructions [here](https://github.com/graphdeco-inria/gaussian-splatting/blob/8a70a8cd6f0d9c0a14f564844ead2d1147d5a7ac/README.md) to set up the necessary environment for 3DGS. You can also build a docker image using the Dockerfile we provided in this repo or directly pull it from [Docker Hub](https://hub.docker.com/r/clchen2133/gsplat). If you'd like to use our Dockerfile, please also modify the source code of the SIBR viewer as shown [here](https://github.com/graphdeco-inria/gaussian-splatting/issues/965#issuecomment-2323401099) to ensure successful installation.
 
 To train Gaussian splats in batches, run
 ```
