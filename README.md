@@ -1,5 +1,5 @@
-# Gaussian splats for ShapeNet
-Running the incredible 3D Gaussian Splatting on ShapeNet. Tested on ShapeNetCore.v2.
+# Gaussian Splatting for ShapeNet
+Running the incredible 3D Gaussian Splatting on the ShapeNet dataset. Tested on ShapeNetCore.v2.
 
 ## Rendering
 ### Installation
