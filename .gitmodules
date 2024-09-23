@@ -1,0 +1,3 @@
+[submodule "gaussian-splatting-shapenet"]
+	path = gaussian-splatting-shapenet
+	url = https://github.com/muriatec/gaussian-splatting-shapenet.git
