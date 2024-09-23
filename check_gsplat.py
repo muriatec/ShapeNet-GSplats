@@ -54,7 +54,7 @@ model_num ={
     '04099429': 85, 
     '02946921': 108, 
     '02828884': 1813, 
-    '02958343': 3514, # 3533
+    '02958343': 3514, # 3533, 
     '03759954': 67, 
     '02933112': 1571
 }
@@ -71,32 +71,26 @@ def check_folder_structure(category, root_folder, output_file):
             subdir_path = os.path.join(root_folder, subdir)
             if os.path.isdir(subdir_path):
                 invalid = False
-                cameras_folder = os.path.join(subdir_path, 'cameras')
-                if not os.path.exists(cameras_folder):
-                    f.write(f"{subdir}: 'cameras' folder missing\n")
+                pcd_folder = os.path.join(subdir_path, 'point_cloud')
+                if not os.path.exists(pcd_folder):
+                    f.write(f"{subdir}: 'point_cloud' folder missing\n")
                     invalid = True
-                intrinsics_file = os.path.join(cameras_folder, 'intrinsics.txt')
-                extrinsics_file = os.path.join(cameras_folder, 'extrinsics.npy')
-                if not (os.path.exists(intrinsics_file) and os.path.exists(extrinsics_file)):
-                    if not os.path.exists(intrinsics_file):
-                        f.write(f"{subdir}: Missing 'intrinsics.txt' in 'cameras' folder\n")
-                    if not os.path.exists(extrinsics_file):
-                        f.write(f"{subdir}: Missing 'extrinsics.npy' in 'cameras' folder\n")
-                    invalid = True
-
-                images_folder = os.path.join(subdir_path, 'images')
-                if not os.path.exists(images_folder):
-                    f.write(f"{subdir}: 'images' folder missing\n")
-                    invalid = True
-                images = [f"{i:02d}.png" for i in range(62)]
-                missing_images = [img for img in images if not os.path.exists(os.path.join(images_folder, img))]
-                if missing_images:
-                    f.write(f"{subdir}: Missing images: {', '.join(missing_images)}\n")
+                iter_7k = os.path.join(pcd_folder, 'iteration_7000')
+                iter_30k = os.path.join(pcd_folder, 'iteration_30000')
+                if not (os.path.exists(iter_7k) and os.path.exists(iter_30k)):
+                    if not os.path.exists(iter_7k):
+                        f.write(f"{subdir}: Missing 'iteration_7000' in 'point_cloud' folder\n")
+                    if not os.path.exists(iter_30k):
+                        f.write(f"{subdir}: Missing 'iteration_30000' in 'point_cloud' folder\n")
                     invalid = True
 
-                point_cloud_file = os.path.join(subdir_path, 'pointcloud.ply')
-                if not os.path.exists(point_cloud_file):
-                    f.write(f"{subdir}: 'pointcloud.ply' missing\n")
+                pcd_7k = os.path.join(iter_7k, 'point_cloud.ply')
+                pcd_30k = os.path.join(iter_30k, 'point_cloud.ply')
+                if not os.path.exists(pcd_7k):
+                    f.write(f"{subdir}: point_cloud.ply at iteration 7000 missing\n")
+                    invalid = True
+                if not os.path.exists(pcd_30k):
+                    f.write(f"{subdir}: point_cloud.ply at iteration 30000 missing\n")
                     invalid = True
 
                 if invalid:
@@ -117,6 +111,6 @@ if __name__ == "__main__":
     parser.add_argument('--category', ('-c'), type=str, default="04379243")
     args = parser.parse_args()
     category = args.category
-    root_folder = os.path.join("/mnt/data/ShapeNetCore.v2.Rendering", category)
-    output_file = os.path.join("/mnt/data/ShapeNetCore.v2.Rendering", category, "check_info.txt")
+    root_folder = os.path.join("/mnt/data/ShapeNetCore.v2.GaussianSplats", category)
+    output_file = os.path.join("/mnt/data/ShapeNetCore.v2.GaussianSplats", category, "check_info.txt")
     check_folder_structure(category, root_folder, output_file)
