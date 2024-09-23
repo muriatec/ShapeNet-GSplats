@@ -36,7 +36,7 @@ Please follow the instructions [here](https://github.com/graphdeco-inria/gaussia
 To train Gaussian splats in batches, run
 ```
 conda activate gaussian_splatting
-cd /path/to/gaussian-splatting-shapenet
+cd /gaussian-splatting-shapenet
 python gsplat_batch.py --filelist_dir ./filelists --num_gpu {number of available GPUs} --dataset_root_dir {where you store the rendering dataset} --gsplat_root_dir {where you store the Gaussians splats}
 ```
 
