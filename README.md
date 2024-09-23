@@ -9,6 +9,11 @@ To use the rendering scripts, just run
 /path/to/blender --background --python render_blender_uniform.py -- --ntheta 12 --nphi 6 --output_dir /path/to/output /path/to/my.obj
 ```
 
+To render objects in batch, run
+```
+/path/to/blender/python -u render_batch_uniform.py --model_root_dir {ShapeNet root dir} --render_root_dir {where you store the rendering dataset} --filelist_dir {which models you want to render} --blender_location {where you blender is installed} --num_thread {10} --shapenetversion {support v1, v2} --debug {False}
+```
+
 You will get the GS-ready dataset organized as follows:
 ```
 └── 📁{model_ID}
@@ -21,9 +26,4 @@ You will get the GS-ready dataset organized as follows:
         └── 02.png
         └── [...]
     └── pointcloud.ply
-```
-
-To render objects in batch, run
-```
-/path/to/blender/python -u render_batch_uniform.py --model_root_dir {ShapeNet root dir} --render_root_dir {where you store the rendering dataset} --filelist_dir {which models you want to render} --blender_location {where you blender is installed} --num_thread {10} --shapenetversion {support v1, v2} --debug {False}
 ```
