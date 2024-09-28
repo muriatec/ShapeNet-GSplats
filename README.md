@@ -2,7 +2,10 @@
 Running the incredible 3D Gaussian Splatting on the ShapeNet dataset. Tested on ShapeNetCore.v2.
 
 ## Dataset
-Coming soon...
+You can download the dataset like this:
+```
+wget https://s3-central.nrp-nautilus.io/chunlinchen/ShapeNetCore.v2.GaussianSplats.30k/{category_ID}.zip
+```
 
 ## Rendering
 ### Installation
