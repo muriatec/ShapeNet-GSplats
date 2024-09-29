@@ -1,5 +1,5 @@
 # Gaussian Splatting for ShapeNet
-Running the incredible 3D Gaussian Splatting on the ShapeNet dataset. Tested on ShapeNetCore.v2.
+Introducing a 3D Gaussian Splatting dataset built on the ShapeNet dataset. Tested on ShapeNetCore.v2.
 
 ## Dataset
 You can download the dataset like this:
