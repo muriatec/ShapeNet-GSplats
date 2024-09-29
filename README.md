@@ -4,7 +4,7 @@ Introducing a 3D Gaussian Splatting dataset built on the ShapeNet dataset. Teste
 ## Dataset
 You can download the dataset like this:
 ```
-wget https://s3-central.nrp-nautilus.io/chunlinchen/ShapeNetCore.v2.GaussianSplats.30k/{category_ID}.zip
+wget https://s3-central.nrp-nautilus.io/chunlinchen/ShapeNetCore.v2.GaussianSplats.30k/{catID}.zip
 ```
 
 ## Rendering
